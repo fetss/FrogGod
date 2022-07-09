@@ -39,8 +39,7 @@ public class Pickup : MonoBehaviour
         {
             if (altar)
             {
-                altar.Sacrifice(holding);
-                holding = 0;
+                holding -= altar.Sacrifice(holding);
             }
         }
     }

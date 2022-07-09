@@ -35,29 +35,20 @@ public class MoveMent : MonoBehaviour
         float x = Input.GetAxis("Horizontal") * movementSpeed;
         float y = Input.GetAxis("Vertical") * movementSpeed;
 
-        transform.position += ((transform.right * x + transform.forward * y) * Time.deltaTime);
+        transform.position += (transform.right * x + transform.forward * y) * Time.deltaTime;
 
-        Gravity = new Vector3(0, -9.81f, 0);
-
-        
-        velocity += Gravity * gravityScale * Time.fixedDeltaTime;
-        //transform.position += velocity * Time.deltaTime;
-        rid.velocity = velocity;
-
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.2f, LayerMask.GetMask("Ground"));
         if (isGrounded)
-        {
-            //velocity = transform.up * Input.GetAxis("Jump") * jumpSpeed;
-        }
-
-        if(Physics.Raycast(transform.position, Vector3.down, 1.1f, LayerMask.GetMask("Ground")))
         {
             velocity = transform.up * Input.GetAxis("Jump") * jumpSpeed;
         }
+        
+        velocity += Gravity * gravityScale * Time.fixedDeltaTime;
+        rid.velocity = velocity;
 
         if (Input.GetAxis("Jump") > 0)
         {
-            //gravityScale = 0.7f;
-            gravityScale = 1f;
+            gravityScale = 0.7f;
         }
         else
         {
