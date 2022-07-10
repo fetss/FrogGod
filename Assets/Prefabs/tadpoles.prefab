@@ -132,6 +132,7 @@ MonoBehaviour:
   detectionRange: 5
   n: 16
   runSpeed: 6
+  jumpStrenght: 5
   state: 0
 --- !u!1001 &7008434472884969909
 PrefabInstance:
@@ -190,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8780518818415991838, guid: bcc964fe81e6a3d4a9d436ff3886f5df, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcc964fe81e6a3d4a9d436ff3886f5df, type: 3}

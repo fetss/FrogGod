@@ -13,6 +13,8 @@ public class MoveMent : MonoBehaviour
 
     Rigidbody rid;
 
+    public bool moveable = true;
+
     [SerializeField] bool isGrounded;
 
     // Start is called before the first frame update
@@ -23,6 +25,11 @@ public class MoveMent : MonoBehaviour
 
     public void Update()
     {
+        if (!moveable)
+        {
+            return;
+        }
+
         Quaternion xQuaternionChange = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * 10, Vector3.up);
 
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(Vector3.Cross(-transform.right, Gravity), -Gravity), 0.1f) * xQuaternionChange;
@@ -32,6 +39,12 @@ public class MoveMent : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!moveable)
+        {
+            return;
+        }
+
+
         float x = Input.GetAxis("Horizontal") * movementSpeed;
         float y = Input.GetAxis("Vertical") * movementSpeed;
 
@@ -56,14 +69,6 @@ public class MoveMent : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        isGrounded = true;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        isGrounded = false;
-    }
+    
 
 }

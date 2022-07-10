@@ -24,6 +24,7 @@ public class Altar : MonoBehaviour
     int stage = 0;
 
     [SerializeField] Text text;
+    [SerializeField] Dialogue dialogue;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +41,12 @@ public class Altar : MonoBehaviour
             if (currentsacrificed >= sac[stage])
             {
                 currentsacrificed -= sac[stage];
+                dialogue.PlayNext();
                 stage++;
             }
         }
+
+        text.text = currentsacrificed.ToString() + "/" + sac[stage].ToString();
 
         Gamedata.fraction = ((float)sacrificed / 60) * ((float)sacrificed / 60);
         current = Color.Lerp(current, Color.Lerp(start, end, Gamedata.fraction), 0.01f);
@@ -56,6 +60,8 @@ public class Altar : MonoBehaviour
         else if (RenderSettings.skybox.HasProperty("_SkyTint"))
             RenderSettings.skybox.SetColor("_SkyTint", current);
 
+
+        
     }
 
     public int Sacrifice(int tadpoles)
@@ -75,8 +81,11 @@ public class Altar : MonoBehaviour
         {
             sacrificed += tadpoles;
             currentsacrificed += tadpoles;
+
             return tadpoles;
         }
-        text.text = sacrificed.ToString() + "/" + sac[stage].ToString();
+
     }
+
+    
 }

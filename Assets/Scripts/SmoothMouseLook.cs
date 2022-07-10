@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class SmoothMouseLook : MonoBehaviour
 {
+    public bool moveable = true;
 
     public float sensitivityY = 8F;
     public float minimumY = -60F;
@@ -17,6 +18,11 @@ public class SmoothMouseLook : MonoBehaviour
 
     void Update()
     {
+        if (!moveable)
+        {
+            return;
+        }
+
         //Resets the average rotation
         rotAverageY = 0f;
 
